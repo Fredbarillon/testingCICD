@@ -14,12 +14,14 @@ class CalculatorTest {
 
     @Test
     @DisplayName("Addition")
+    @Order(1)
     void add_shouldReturnSum() {
         assertThat(calculator.add(6, 6)).isEqualTo(12);
     }
 
     @Test
     @DisplayName("Soustraction")
+    @Order(2)
     void sub_shouldReturnDifference() {
         assertThat(calculator.sub(5, 3)).isEqualTo(2)
                 .isPositive();
@@ -27,13 +29,15 @@ class CalculatorTest {
 
     @Test
     @DisplayName("Multiplication")
+    @Order(3)
     void mul_shouldReturnProduct() {
-        assertThat(calculator.mul(8, 8)).isEqualTo(54)
-                .isBetween(45, 55);
+        assertThat(calculator.mul(2, 2)).isEqualTo(4)
+                .isBetween(1, 5);
     }
 
     @Test
     @DisplayName("Division")
+    @Order(4)
     void div_shouldReturnQuotient() {
         assertThat(calculator.div(8, 2)).isEqualTo(4)
                 .isNotZero();
@@ -41,9 +45,10 @@ class CalculatorTest {
 
     @Test
     @DisplayName("Division par zéro — lève ArithmeticException")
+    @Order(5)
     void div_byZero_shouldThrow() {
         assertThatThrownBy(() -> calculator.div(4, 0))
                 .isInstanceOf(ArithmeticException.class)
-                .hasMessageContaining("/ zero");
+                .hasMessageContaining("/ by zero");
     }
 }
