@@ -17,7 +17,6 @@ class WordGeneratorTest {
     private SecureRandom testRandom(int value) {
         return new SecureRandom() {
             @Override public int nextInt(int size) {
-                // On vérifie que la borne est bien la taille de la liste
                 assertThat(size).isEqualTo(testList().size());
                 return value;
             }
@@ -28,15 +27,15 @@ class WordGeneratorTest {
     @Order(1)
     void getWord_shouldReturnWordAtIndex() {
         WordGenerator gen = new WordGenerator(testList(), testRandom(0));
-        assertThat(gen.getWord(1)).isEqualTo("test1");
-        assertThat(gen.getWord(2)).isEqualTo("test2");
+        assertThat(gen.getWord(0)).isEqualTo("test1");
+        assertThat(gen.getWord(1)).isEqualTo("test2");
     }
 
     @Test
     @Order(2)
     void getRandomWord_shouldReturnWordWithinRange() {
-        WordGenerator generator = new WordGenerator(testList(), testRandom(4));
-        assertThat(generator.getRandomWord()).isEqualTo("test1");
+        WordGenerator generator = new WordGenerator(testList(), testRandom(3));
+        assertThat(generator.getRandomWord()).isEqualTo("test4");
     }
 
 }
