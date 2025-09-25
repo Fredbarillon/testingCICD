@@ -1,5 +1,6 @@
-package org.app;
+package test.java;
 
+import org.app.Calculator;
 import org.junit.jupiter.api.*;
 import static org.assertj.core.api.Assertions.*;
 
@@ -44,7 +45,7 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("Division par zéro — lève ArithmeticException")
+    @DisplayName("Division par zéro")
     @Order(5)
     void div_byZero_shouldThrow() {
         assertThatThrownBy(() -> calculator.div(4, 0))
