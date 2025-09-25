@@ -1,6 +1,5 @@
-package test.java;
+package org.app;
 
-import org.app.Calculator;
 import org.junit.jupiter.api.*;
 import static org.assertj.core.api.Assertions.*;
 
@@ -9,33 +8,42 @@ class CalculatorTest {
     private Calculator calculator;
 
     @BeforeEach
-    void init() {
+    void setUp() {
         calculator = new Calculator();
     }
 
     @Test
-    @DisplayName("Addition volontairement faux")
-    void add_shouldFail() {
-        assertThat(calculator.add(6, 6)).isEqualTo(13);
+    @DisplayName("Addition")
+    void add_shouldReturnSum() {
+        assertThat(calculator.add(6, 6)).isEqualTo(12);
     }
 
     @Test
-    @DisplayName("Soustraction volontairement faux")
-    void sub_shouldFail() {
-        assertThat(calculator.sub(5, 3)).isEqualTo(3);
+    @DisplayName("Soustraction")
+    void sub_shouldReturnDifference() {
+        assertThat(calculator.sub(5, 3)).isEqualTo(2)
+                .isPositive();
     }
 
     @Test
-    @DisplayName("Multiplication volontairement faux")
-    void mul_shouldFail() {
-        assertThat(calculator.mul(8, 8))
-                .isEqualTo(54)
+    @DisplayName("Multiplication")
+    void mul_shouldReturnProduct() {
+        assertThat(calculator.mul(8, 8)).isEqualTo(54)
                 .isBetween(45, 55);
     }
 
     @Test
-    @DisplayName("Division volontairement faux")
-    void div_shouldFail() {
-        assertThat(calculator.div(8, 2));
+    @DisplayName("Division")
+    void div_shouldReturnQuotient() {
+        assertThat(calculator.div(8, 2)).isEqualTo(4)
+                .isNotZero();
+    }
+
+    @Test
+    @DisplayName("Division par zéro — lève ArithmeticException")
+    void div_byZero_shouldThrow() {
+        assertThatThrownBy(() -> calculator.div(4, 0))
+                .isInstanceOf(ArithmeticException.class)
+                .hasMessageContaining("/ zero");
     }
 }
