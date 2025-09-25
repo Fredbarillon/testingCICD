@@ -4,6 +4,8 @@ import org.app.Calculator;
 import org.junit.jupiter.api.*;
 import static org.assertj.core.api.Assertions.*;
 
+
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class CalculatorTest {
 
     private Calculator calculator;
@@ -33,7 +35,7 @@ class CalculatorTest {
     @Order(3)
     void mul_shouldReturnProduct() {
         assertThat(calculator.mul(2, 2)).isEqualTo(4)
-                .isBetween(1, 5);
+                .isBetween(1.0, 5.0);
     }
 
     @Test
